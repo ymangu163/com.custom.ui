@@ -8,6 +8,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.custom.ui.activity.JDActivity;
+import com.custom.ui.activity.YouKuActivity;
+import com.custom.ui.utils.ActivityUtil;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -87,7 +89,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 			
 		case R.id.two:
-			
+			ActivityUtil.goToActivityFromBottom2Top(MainActivity.this, YouKuActivity.class);
 			break;
 		case R.id.three:
 			

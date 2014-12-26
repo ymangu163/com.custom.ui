@@ -23,6 +23,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.JDActivity"  android:launchMode="singleInstance"></activity>
+        <activity android:name=".activity.YouKuActivity"  android:launchMode="singleInstance"></activity>
+    
+    
     </application>
+    
+    
 
 </manifest>
