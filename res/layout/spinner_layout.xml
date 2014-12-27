@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/empty_cart_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="#ffefebe7">
+  
+ <EditText
+        android:id="@+id/inputEdit"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/hello_world" />
+    
+    <ImageView 
+        android:id="@+id/downImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/down_arrow"
+        android:layout_alignRight="@id/inputEdit"
+        android:clickable="true"
+        android:layout_marginTop="15dp"
+        />
+ 
+ 
+ 
+ 
+ </RelativeLayout>

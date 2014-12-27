@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.custom.ui.activity.BannerActivity;
 import com.custom.ui.activity.JDActivity;
+import com.custom.ui.activity.SpinnerActivity;
 import com.custom.ui.activity.YouKuActivity;
 import com.custom.ui.utils.ActivityUtil;
 import com.lidroid.xutils.ViewUtils;
@@ -97,6 +98,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			
 			break;
 		case R.id.four:
+		
 			
 			break;
 		case R.id.five:
@@ -118,7 +120,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			
 			break;
 		case R.id.devide:
-			
+			ActivityUtil.goToActivity(MainActivity.this, SpinnerActivity.class);
 			break;
 		case R.id.multiply:
 			

@@ -99,6 +99,7 @@ public class BannerActivity extends Activity {
 	
 	
 	protected void onDestroy() {
+		super.onDestroy();
 		isRunning=false;    // Activity 销毁时，就不循环了
 		
 	};
