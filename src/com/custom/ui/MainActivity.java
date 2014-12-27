@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.custom.ui.activity.BannerActivity;
 import com.custom.ui.activity.JDActivity;
 import com.custom.ui.activity.YouKuActivity;
 import com.custom.ui.utils.ActivityUtil;
@@ -92,6 +93,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			ActivityUtil.goToActivityFromBottom2Top(MainActivity.this, YouKuActivity.class);
 			break;
 		case R.id.three:
+			ActivityUtil.goToActivity(MainActivity.this, BannerActivity.class);
 			
 			break;
 		case R.id.four:

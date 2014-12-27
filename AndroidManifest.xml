@@ -24,6 +24,7 @@
         </activity>
         <activity android:name=".activity.JDActivity"  android:launchMode="singleInstance"></activity>
         <activity android:name=".activity.YouKuActivity"  android:launchMode="singleInstance"></activity>
+        <activity android:name=".activity.BannerActivity"  android:launchMode="singleInstance"></activity>
     
     
     </application>
