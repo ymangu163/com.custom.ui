@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ToggleButton;
 
 import com.custom.ui.activity.BannerActivity;
 import com.custom.ui.activity.JDActivity;
 import com.custom.ui.activity.SpinnerActivity;
+import com.custom.ui.activity.ToggleBtnActivity;
 import com.custom.ui.activity.YouKuActivity;
 import com.custom.ui.utils.ActivityUtil;
 import com.lidroid.xutils.ViewUtils;
@@ -98,8 +100,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			
 			break;
 		case R.id.four:
+			ActivityUtil.goToActivity(MainActivity.this, ToggleBtnActivity.class);		
 		
-			
 			break;
 		case R.id.five:
 			

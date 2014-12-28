@@ -5,6 +5,6 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry exported="true" kind="lib" path="libs/xUtils-2.4.7.jar"/>
-	<classpathentry exported="true" kind="lib" path="E:/Android Install/adt-bundle-windows-x86_64/sdk/extras/android/support/v4/android-support-v4.jar" sourcepath="E:/Android Install/adt-bundle-windows-x86_64/sdk/extras/android/support/v4"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

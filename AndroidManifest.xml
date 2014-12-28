@@ -26,6 +26,7 @@
         <activity android:name=".activity.YouKuActivity"  android:launchMode="singleInstance"></activity>
         <activity android:name=".activity.BannerActivity"  android:launchMode="singleInstance"></activity>
         <activity android:name=".activity.SpinnerActivity"  android:launchMode="singleInstance"></activity>
+        <activity android:name=".activity.ToggleBtnActivity"  android:launchMode="singleInstance"></activity>
     
     
     </application>
