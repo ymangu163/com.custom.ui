@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ymangu="http://schemas.android.com/apk/res/com.custom.ui"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    tools:context=".AttrActivity">
+    
+    <!-- 在布局文件中使用：在使用之前必须声名命名空间，
+    xmlns:heima="http://schemas.android.com/apk/res/com.itheima.mytogglebtn"
+	说明：xmlns 是XML name space 的缩写； 
+	      heima 可为任意写符 
+	      http://schemas.android.com/apk/res/  此为android固定格式；
+	      com.itheima.mytogglebtn  此应用的包名，如manifest配置文件中一致。    
+     -->
+     
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/hello_world"
+		ymangu:test_msg="dfdfdfdsfg"
+        />
+    
+    
+    
+
+</RelativeLayout>

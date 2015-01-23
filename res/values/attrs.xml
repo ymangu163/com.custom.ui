@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 文件名字可以随便取，如iheima.xml；但为了可读性好，还是用系统默认的attrs.xml -->
+<!-- format 常用类型
+		reference		引用
+		color		颜色
+		boolean		布尔值
+		dimension		尺寸值
+		float		浮点值
+		integer		整型值
+		string		字符串
+		enum		布尔值 -->
+<resources>
+    <!-- 声明属性集的名称  -->
+       <declare-styleable name="MyView">
+           
+           <!-- 声明一个属性 name是test_id,类型是整数类型 -->
+           <attr  name="test_id"  format="integer"></attr>
+           
+           <attr name="test_msg"  format="string"/>
+           
+             <!-- 声明一个属性 name是test_bitmap,类型是引用类型，引用资源ID -->
+           <attr name="test_bitmap"  format="reference"/>
+           
+            
+           </declare-styleable>
+</resources>

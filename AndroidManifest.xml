@@ -27,6 +27,8 @@
         <activity android:name=".activity.BannerActivity"  android:launchMode="singleInstance"></activity>
         <activity android:name=".activity.SpinnerActivity"  android:launchMode="singleInstance"></activity>
         <activity android:name=".activity.ToggleBtnActivity"  android:launchMode="singleInstance"></activity>
+        <activity android:name=".activity.AttrActivity"  android:launchMode="singleInstance"></activity>
+        <activity android:name=".activity.TouchActivity"  android:launchMode="singleInstance"></activity>
     
     
     </application>

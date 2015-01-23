@@ -2,6 +2,7 @@ package com.custom.ui.activity;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -33,7 +34,11 @@ public class YouKuActivity extends Activity implements OnClickListener {
 	private RelativeLayout level2;
 	@ViewInject(R.id.level3)
 	private RelativeLayout level3;
-
+	@ViewInject(R.id.channel1)
+	private ImageView mp3Image;
+	
+	
+	
 	/**
 	 * 判断 第3级菜单是否显示
 	 * true 为显示
@@ -68,7 +73,8 @@ public class YouKuActivity extends Activity implements OnClickListener {
 	//初始化监听
 	private void initListener() {
 		icon_home.setOnClickListener(this);   //为 ImageView 设置监听事件
-		icon_menu.setOnClickListener(this);		
+		icon_menu.setOnClickListener(this);	
+		mp3Image.setOnClickListener(this);
 	}
 
 
@@ -110,6 +116,13 @@ public class YouKuActivity extends Activity implements OnClickListener {
 			
 			break;
 		
+		case R.id.channel1:
+			 Intent intent=new Intent(YouKuActivity.this,TouchActivity.class);
+			 startActivity(intent);
+			 
+			break;
+			
+			
 		default:
 			break;
 		
