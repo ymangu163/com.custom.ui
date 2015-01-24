@@ -36,6 +36,8 @@ public class YouKuActivity extends Activity implements OnClickListener {
 	private RelativeLayout level3;
 	@ViewInject(R.id.channel1)
 	private ImageView mp3Image;
+	@ViewInject(R.id.channel2)
+	private ImageView channel2;
 	
 	
 	
@@ -54,6 +56,7 @@ public class YouKuActivity extends Activity implements OnClickListener {
 	 * true 为显示
 	 */
 	private boolean isLevel1show = true;
+	private Intent intent;
 	
 	
 	@Override
@@ -75,6 +78,7 @@ public class YouKuActivity extends Activity implements OnClickListener {
 		icon_home.setOnClickListener(this);   //为 ImageView 设置监听事件
 		icon_menu.setOnClickListener(this);	
 		mp3Image.setOnClickListener(this);
+		channel2.setOnClickListener(this);
 	}
 
 
@@ -117,11 +121,14 @@ public class YouKuActivity extends Activity implements OnClickListener {
 			break;
 		
 		case R.id.channel1:
-			 Intent intent=new Intent(YouKuActivity.this,TouchActivity.class);
+			 intent = new Intent(YouKuActivity.this,TouchActivity.class);
 			 startActivity(intent);
 			 
 			break;
-			
+		case R.id.channel2:
+			 intent=new Intent(YouKuActivity.this,SlinceInstallActivity.class);
+			 startActivity(intent);
+			break;
 			
 		default:
 			break;

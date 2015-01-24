@@ -7,6 +7,8 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
+    
+
 
     <application
         android:allowBackup="true"
@@ -29,6 +31,7 @@
         <activity android:name=".activity.ToggleBtnActivity"  android:launchMode="singleInstance"></activity>
         <activity android:name=".activity.AttrActivity"  android:launchMode="singleInstance"></activity>
         <activity android:name=".activity.TouchActivity"  android:launchMode="singleInstance"></activity>
+        <activity android:name=".activity.SlinceInstallActivity"  android:launchMode="singleInstance"></activity>
     
     
     </application>
