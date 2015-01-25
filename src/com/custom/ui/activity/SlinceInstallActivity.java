@@ -16,7 +16,7 @@ import com.custom.ui.R;
  *  ① 通过 Intent 调用系统的安装 
  *  ② adb 命令
  *  ③ 第三方，360，应用宝等
- *  ④ 静默安装  ,google play   pm
+ *  ④ 静默安装  ,google play   
  */
 
 public class SlinceInstallActivity extends Activity {
@@ -33,6 +33,8 @@ public class SlinceInstallActivity extends Activity {
 			
 			@Override
 			public void run() {
+				
+				
 				super.run();
 				
 				try {

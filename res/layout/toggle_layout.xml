@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:heima="http://schemas.android.com/apk/res/com.custom.ui"
     android:id="@+id/empty_cart_view"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" 
     android:background="#ffefebe7">
-  
+  <!-- 
+  	说明：xmlns 是XML name space 的缩写； 
+	      heima 可为任意写符 
+	      http://schemas.android.com/apk/res/  此为android固定格式；
+	      com.itheima.mytogglebtn  此应用的包名，如manifest配置文件中一致。
+   -->
     <com.custom.ui.view.CustToggleBtn
         android:id="@+id/toggle_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-	/>
-    
-    
+        heima:my_background="@drawable/switch_background"
+        heima:my_slide_btn="@drawable/slide_button"
+        heima:curr_state="true"
+        testAttrs="@drawable/ic_launcher"
+        testStr="this is a test."
+	/>   
      
  </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.custom.ui.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -11,22 +12,38 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import com.custom.ui.R;
 
-/**
+/*
  * .  一个View 对象要显示在屏幕上，有几个重要步骤呢？
  * 1. 调用 构造函数 创建对象
  * 2. 测量View 的大小    ---- onMeasure(int,int)
  * 3. 确定View的位置，View自身有一些建议权，决定权在父View手中  --- onLayout()
  * 4. 绘制View 的内容  --- onDraw(Canvas)
  **/
+
+/*
+ *   新控件添加自定义的属性
+ * 1、在attrs.xml文件中声明属性，有属性名：name和格式：format 。如：
+    <declare-styleable name="MyToggleBtn">  
+        <attr name="current_state" format="boolean"/>  
+    </declare-styleable> 
+2、在布局文件中使用新属性，使用之前必须先声明命名空间,如：xmlns:heima="http://schemas.android.com/apk/res/com.itheima.mytogglebtn"
+3、在自定义view的构造方法当中，通过解析 AttributeSet 对象，获得所需要的属性值。
+ * 
+ */
 public class CustToggleBtn extends View implements OnClickListener {
 	
 	
-	private Bitmap backgroudBitmap;
 	private Bitmap slideBtn;
 	private Paint paint;
 	private float slideBtn_left;   // 滑动按钮的左边界
 	private boolean currState=false;  //当前开关的状态，true为开
-
+	/**
+	 * 背景图的资源ID
+	 */
+	private int backgroundId;
+	private Bitmap backgroundBitmap;
+	private int slideBtnId;
+	
 	/**
 	 * 在代码里面创建对象的时候，使用此构造方法
 	 */
@@ -42,6 +59,47 @@ public class CustToggleBtn extends View implements OnClickListener {
 	public CustToggleBtn(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		
+		//无命名空间测试		
+	    String testAttrs = attrs.getAttributeValue(null, "testStr");				
+		System.out.println("testStr===:"+testAttrs);
+		
+		
+		// 获得自定义的属性
+		TypedArray ta=context.obtainStyledAttributes(attrs,R.styleable.MyToggleBtn);
+		int N = ta.getIndexCount();
+		for (int i = 0; i < N; i++) {
+			/*
+			 * 获得某个属性的ID值
+			 */
+			int itemId = ta.getIndex(i);
+			switch (itemId) {
+			case R.styleable.MyToggleBtn_curr_state:
+				currState = ta.getBoolean(itemId, false);
+				
+				break;
+			case R.styleable.MyToggleBtn_my_background:
+				backgroundId = ta.getResourceId(itemId, -1);
+				if(backgroundId == -1){
+					throw new RuntimeException("请设置背景图片");
+				}
+				backgroundBitmap = BitmapFactory.decodeResource(getResources(), backgroundId);
+				
+				break;
+			case R.styleable.MyToggleBtn_my_slide_btn:
+				slideBtnId = ta.getResourceId(itemId, -1);
+				slideBtn = BitmapFactory.decodeResource(getResources(), slideBtnId);
+				
+				break;
+			
+			default:
+				break;
+			
+			}
+			
+		}
+		
+		
+		
 		initView();
 	}
 
@@ -52,9 +110,9 @@ public class CustToggleBtn extends View implements OnClickListener {
 		/**
 		 * 做为背景的图片
 		 */
-		backgroudBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.switch_background);
+//		backgroudBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.switch_background);
 		//可以滑动的图片
-		slideBtn = BitmapFactory.decodeResource(getResources(), R.drawable.slide_button);
+//		slideBtn = BitmapFactory.decodeResource(getResources(), R.drawable.slide_button);
 		
 		//初始化 画笔
 		paint = new Paint();
@@ -62,6 +120,8 @@ public class CustToggleBtn extends View implements OnClickListener {
 		
 		// 添加 onclick事件监听
 		setOnClickListener(this);   
+		flushState();
+		
 	}
 
 	/**
@@ -76,7 +136,7 @@ public class CustToggleBtn extends View implements OnClickListener {
 		 * width  :view的宽度
 		 * height :view的高度   （单位：像素）
 		 */
-		setMeasuredDimension(backgroudBitmap.getWidth(), backgroudBitmap.getHeight());
+		setMeasuredDimension(backgroundBitmap.getWidth(), backgroundBitmap.getHeight());
 		
 	}
 	
@@ -102,7 +162,7 @@ public class CustToggleBtn extends View implements OnClickListener {
 		 * left , top	图片的左上角的位置
 		 * paint 绘制图片要使用的画笔
 		 */
-		canvas.drawBitmap(backgroudBitmap, 0, 0, paint) ;   //绘制背景
+		canvas.drawBitmap(backgroundBitmap, 0, 0, paint) ;   //绘制背景
 		
 		//绘制 可滑动的按钮
 		/**
@@ -148,7 +208,7 @@ public class CustToggleBtn extends View implements OnClickListener {
 	private void flushState() {
 		// 根据开关状态，设置相应的位置
 		if(currState){
-			slideBtn_left=backgroudBitmap.getWidth()-slideBtn.getWidth();		
+			slideBtn_left=backgroundBitmap.getWidth()-slideBtn.getWidth();		
 			
 		}else{
 			slideBtn_left=0;
@@ -194,7 +254,7 @@ public class CustToggleBtn extends View implements OnClickListener {
 		case MotionEvent.ACTION_UP:			
 			//在发生拖动的情况下，根据最后的位置，判断当前开关的状态; 解决拖动时停在中间的问题
 			if (isDrag) {
-				int maxLeft = backgroudBitmap.getWidth() - slideBtn.getWidth(); // slideBtn 左边界最大值
+				int maxLeft = backgroundBitmap.getWidth() - slideBtn.getWidth(); // slideBtn 左边界最大值
 				/*
 				 * 根据 slideBtn_left 判断，当前应是什么状态
 				 */
@@ -226,7 +286,7 @@ public class CustToggleBtn extends View implements OnClickListener {
 	 */
 	private void flushView() {
 
-		int maxLeft = backgroudBitmap.getWidth()-slideBtn.getWidth();	//	slideBtn 左边届最大值
+		int maxLeft = backgroundBitmap.getWidth()-slideBtn.getWidth();	//	slideBtn 左边届最大值
 
 		//确保 slideBtn_left >= 0
 		slideBtn_left = (slideBtn_left>0)?slideBtn_left:0;
