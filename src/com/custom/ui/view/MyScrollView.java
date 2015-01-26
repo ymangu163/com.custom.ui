@@ -20,7 +20,7 @@ public class MyScrollView extends ViewGroup {
 	
 	
 	private void initView() {
-		
+		myScroller = new MyScroller(context);
 		detector=new GestureDetector(context, new OnGestureListener() {
 			
 			@Override
@@ -146,7 +146,7 @@ public class MyScrollView extends ViewGroup {
 		return true;   // 要return  true，才往下分发事件
 	}
 	
-	
+	private MyScroller myScroller;
 	
 	/**
 	 * 移动到指定的屏幕上
@@ -161,10 +161,41 @@ public class MyScrollView extends ViewGroup {
 		currId = (nextId<=getChildCount()-1)?nextId:(getChildCount()-1);
 		
 		//瞬间移动
-		scrollTo(currId*getWidth(), 0);
+//		scrollTo(currId*getWidth(), 0);
+		
+		
+		int distance = currId*getWidth() - getScrollX(); // 最终的位置 - 现在的位置  = 要移动的距离
+		
+		myScroller.startScroll(getScrollX(),0,distance,0);
+		
+		
+		/*
+		 * 刷新当前view ； 导致 onDraw()方法 的执行
+		 */
+		invalidate();
 			
 	}
 
+	@Override
+	/**
+	 * invalidate();  会导致  computeScroll（）这个方法的执行
+	 */
+	public void computeScroll() {
+		
+		if(myScroller.computeScrollOffset()){
+			int newX = (int) myScroller.getCurrX();
+			System.out.println("newX::"+newX);
+			
+			scrollTo(newX, 0);
+			
+			invalidate();
+		};
+		
+	}
+	
+	
+	
+	
 
 	/**
 	 * 对子view进行布局，确定子view的位置
