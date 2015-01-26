@@ -32,6 +32,7 @@
         <activity android:name=".activity.AttrActivity"  android:launchMode="singleInstance"></activity>
         <activity android:name=".activity.TouchActivity"  android:launchMode="singleInstance"></activity>
         <activity android:name=".activity.SlinceInstallActivity"  android:launchMode="singleInstance"></activity>
+        <activity android:name=".activity.CustomVGroupActivity"  android:launchMode="singleInstance"></activity>
     
     
     </application>

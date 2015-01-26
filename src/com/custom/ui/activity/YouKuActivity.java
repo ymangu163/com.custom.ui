@@ -38,6 +38,8 @@ public class YouKuActivity extends Activity implements OnClickListener {
 	private ImageView mp3Image;
 	@ViewInject(R.id.channel2)
 	private ImageView channel2;
+	@ViewInject(R.id.channel3)
+	private ImageView channel3;
 	
 	
 	
@@ -79,6 +81,7 @@ public class YouKuActivity extends Activity implements OnClickListener {
 		icon_menu.setOnClickListener(this);	
 		mp3Image.setOnClickListener(this);
 		channel2.setOnClickListener(this);
+		channel3.setOnClickListener(this);
 	}
 
 
@@ -129,6 +132,11 @@ public class YouKuActivity extends Activity implements OnClickListener {
 			 intent=new Intent(YouKuActivity.this,SlinceInstallActivity.class);
 			 startActivity(intent);
 			break;
+		case R.id.channel3:
+			intent=new Intent(YouKuActivity.this,CustomVGroupActivity.class);
+			 startActivity(intent);			
+			break;
+			
 			
 		default:
 			break;

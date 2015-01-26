@@ -10,6 +10,7 @@ import android.widget.ToggleButton;
 
 import com.custom.ui.activity.AttrActivity;
 import com.custom.ui.activity.BannerActivity;
+import com.custom.ui.activity.CustomVGroupActivity;
 import com.custom.ui.activity.JDActivity;
 import com.custom.ui.activity.SpinnerActivity;
 import com.custom.ui.activity.ToggleBtnActivity;
@@ -105,7 +106,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 			break;
 		case R.id.five:
-			ActivityUtil.goToActivity(MainActivity.this, AttrActivity.class);		
+			ActivityUtil.goToActivity(MainActivity.this, CustomVGroupActivity.class);		
 			
 			break;
 		case R.id.six:
