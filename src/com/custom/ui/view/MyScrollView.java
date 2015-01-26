@@ -33,6 +33,8 @@ public class MyScrollView extends ViewGroup {
 			@Override
 			public void onShowPress(MotionEvent e) {
 				
+				
+				
 			}
 			
 			/**
@@ -51,6 +53,12 @@ public class MyScrollView extends ViewGroup {
 				 */
 				scrollBy((int) distanceX, 0);
 				
+				/**
+				 * 将当前视图的基准点移动到某个点  坐标点
+				 * x 水平方向X坐标
+				 * Y 竖直方向Y坐标
+				 *  scrollTo(x,  y);
+				 */
 				
 				return false;
 			}
@@ -87,11 +95,52 @@ public class MyScrollView extends ViewGroup {
 	 */
 	private GestureDetector  detector;
 	
+	/**
+	 * 当前View的ID值, 显示在屏幕上的子View的下标
+	 */
+	private int currId = 0;
+	
+	/**
+	 * down 事件时的x坐标
+	 */
+	private int firstX = 0;
+	
+	
+	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// 把 touch事件 分发给它
 		detector.onTouchEvent(event);
 		
+		//添加自己的事件解析
+		
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					firstX = (int) event.getX();
+					
+					break;
+				case MotionEvent.ACTION_MOVE:
+					
+					break;
+				case MotionEvent.ACTION_UP:				
+		
+//						scrollTo(0, 0);  //恢复到（0，0）
+					
+					int nextId = 0;
+					if(event.getX()-firstX>getWidth()/2 && currId>0){ // 手指向右滑动，超过屏幕的1/2  当前的currid - 1
+						
+						nextId = currId-1;
+					}else if(firstX - event.getX()>getWidth()/2){ // 手指向左滑动，超过屏幕的1/2  当前的currid + 1
+						nextId = currId+1;
+					}else{
+						nextId = currId;
+					}
+					// 移动到指定的页上
+					moveToDest(nextId);
+					
+					
+					break;
+				}
 		
 		
 		return true;   // 要return  true，才往下分发事件
@@ -99,7 +148,24 @@ public class MyScrollView extends ViewGroup {
 	
 	
 	
-	
+	/**
+	 * 移动到指定的屏幕上
+	 * @param nextId	屏幕 的下标
+	 */
+	private void moveToDest(int nextId) {
+		/*
+		 * 对 nextId 进行判断 ，确保 是在合理的范围  
+		 * 即  nextId >=0  && next <=getChildCount()-1
+		 */
+		currId = (nextId>=0)?nextId:0;
+		currId = (nextId<=getChildCount()-1)?nextId:(getChildCount()-1);
+		
+		//瞬间移动
+		scrollTo(currId*getWidth(), 0);
+			
+	}
+
+
 	/**
 	 * 对子view进行布局，确定子view的位置
 	 * changed  若为true ，说明布局发生了变化
@@ -117,8 +183,7 @@ public class MyScrollView extends ViewGroup {
 			
 //			view.getWidth();  得到view的真实的大小。		
 		
-		}
-		
+		}		
 		
 	}
 	
