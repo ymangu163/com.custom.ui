@@ -7,10 +7,12 @@ import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Scroller;
 
 public class MyScrollView extends ViewGroup {
 
 	private Context context;
+	private boolean isFling;
 	
 	public MyScrollView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -20,9 +22,12 @@ public class MyScrollView extends ViewGroup {
 	
 	
 	private void initView() {
-		myScroller = new MyScroller(context);
+//		myScroller = new MyScroller(context);
+		myScroller = new Scroller(context);
 		detector=new GestureDetector(context, new OnGestureListener() {
 			
+			
+
 			@Override
 			public boolean onSingleTapUp(MotionEvent e) {
 				
@@ -68,10 +73,20 @@ public class MyScrollView extends ViewGroup {
 				
 			}
 			
+			/**
+			 * 发生快速滑动时的回调
+			 */
 			@Override
 			public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 					float velocityY) {
-				
+					isFling = true;
+					if(velocityX>0 && currId>0){ // 快速向右滑动
+						currId--;
+					}else if(velocityX<0 && currId<getChildCount()-1){ // 快速向左滑动
+						currId++;
+					}
+					
+					moveToDest(currId);				
 				
 				return false;
 			}
@@ -123,7 +138,9 @@ public class MyScrollView extends ViewGroup {
 					
 					break;
 				case MotionEvent.ACTION_UP:				
-		
+						if(!isFling){					
+						
+					
 //						scrollTo(0, 0);  //恢复到（0，0）
 					
 					int nextId = 0;
@@ -138,6 +155,8 @@ public class MyScrollView extends ViewGroup {
 					// 移动到指定的页上
 					moveToDest(nextId);
 					
+				}
+					isFling=false;
 					
 					break;
 				}
@@ -146,13 +165,14 @@ public class MyScrollView extends ViewGroup {
 		return true;   // 要return  true，才往下分发事件
 	}
 	
-	private MyScroller myScroller;
+//	private MyScroller myScroller;
+	private Scroller myScroller;
 	
 	/**
 	 * 移动到指定的屏幕上
 	 * @param nextId	屏幕 的下标
 	 */
-	private void moveToDest(int nextId) {
+	public  void moveToDest(int nextId) {
 		/*
 		 * 对 nextId 进行判断 ，确保 是在合理的范围  
 		 * 即  nextId >=0  && next <=getChildCount()-1
@@ -163,10 +183,15 @@ public class MyScrollView extends ViewGroup {
 		//瞬间移动
 //		scrollTo(currId*getWidth(), 0);
 		
+		//触发listener事件
+				if(pageChangedListener!=null){
+					pageChangedListener.moveToDest(currId);
+				}
+		
 		
 		int distance = currId*getWidth() - getScrollX(); // 最终的位置 - 现在的位置  = 要移动的距离
 		
-		myScroller.startScroll(getScrollX(),0,distance,0);
+		myScroller.startScroll(getScrollX(),0,distance,0,Math.abs(distance));
 		
 		
 		/*
@@ -216,6 +241,24 @@ public class MyScrollView extends ViewGroup {
 		
 		}		
 		
+	}
+	
+	/**
+	 * 页面更改时的监听接口
+	 */
+	public interface MyPageChangedListener{
+		void moveToDest(int currid);
+	}
+	
+	// 定义一个接口对象
+	private MyPageChangedListener  pageChangedListener;
+
+	public MyPageChangedListener getPageChangedListener() {
+		return pageChangedListener;
+	}
+
+	public void setPageChangedListener(MyPageChangedListener pageChangedListener) {
+		this.pageChangedListener = pageChangedListener;
 	}
 	
 	
