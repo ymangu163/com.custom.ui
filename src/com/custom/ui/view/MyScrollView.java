@@ -124,6 +124,10 @@ public class MyScrollView extends ViewGroup {
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
+		
+		
+		
+		
 		// 把 touch事件 分发给它
 		detector.onTouchEvent(event);
 		
@@ -244,6 +248,71 @@ public class MyScrollView extends ViewGroup {
 	}
 	
 	/**
+	 * 做为viewGroup 还有一个责任，，：计算 子view的大小
+	 */
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		
+		// int --> 32位，后30位是父View能给你的大小 ，前两位是模式
+		int size = MeasureSpec.getSize(widthMeasureSpec);
+		int mode = MeasureSpec.getMode(widthMeasureSpec);
+		
+		for (int i = 0; i < getChildCount(); i++) {
+			View v = getChildAt(i);
+			v.measure(widthMeasureSpec, heightMeasureSpec);			
+			
+//			v.getMeasuredWidth() // 得到测量的大小
+		}
+			
+		
+	}
+	
+	/*
+	 *  是否中断事件的传递
+	 *  return false  不中断
+	 *  return true 中断事件，执行自己的onTouch方法
+	 */
+	@Override
+	public boolean onInterceptTouchEvent(MotionEvent ev) {
+		boolean result=false;
+			
+		switch(ev.getAction()){
+		case MotionEvent.ACTION_DOWN:
+			// 得到的是相对于自身左上角的值
+			firstX=(int)ev.getX();
+			firstY = (int)ev.getY();
+			
+			break;
+		case MotionEvent.ACTION_MOVE:
+			// 手指在屏幕上水平移动的绝对值
+			int disx=(int)Math.abs(ev.getX()-firstX);
+			// 手指在屏幕上垂直移动的绝对值
+			int disy=(int)Math.abs(ev.getY()-firstY);
+			
+			if(disx>disy && disx>10){
+				result=true;
+				
+			}else{
+				result=false;
+			}
+			
+			
+			break;
+		case MotionEvent.ACTION_UP:
+			
+			break;
+		
+		}
+		
+		
+		return result;
+	}
+	
+	
+	
+	
+	/**
 	 * 页面更改时的监听接口
 	 */
 	public interface MyPageChangedListener{
@@ -252,6 +321,7 @@ public class MyScrollView extends ViewGroup {
 	
 	// 定义一个接口对象
 	private MyPageChangedListener  pageChangedListener;
+	private int firstY;
 
 	public MyPageChangedListener getPageChangedListener() {
 		return pageChangedListener;

@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -59,7 +60,9 @@ public class CustomVGroupActivity extends Activity {
 			}
 		});
 		
-		
+		//给自定义viewGroup添加测试的布局
+		View temp = getLayoutInflater().inflate(R.layout.scroll_list, null);
+		msv.addView(temp, 2);
 		
 		for (int i = 0; i < msv.getChildCount(); i++) {
 			//添加radioButton
