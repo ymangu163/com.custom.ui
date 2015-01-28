@@ -12,6 +12,7 @@ import com.custom.ui.activity.AttrActivity;
 import com.custom.ui.activity.BannerActivity;
 import com.custom.ui.activity.CustomVGroupActivity;
 import com.custom.ui.activity.JDActivity;
+import com.custom.ui.activity.RingActivity;
 import com.custom.ui.activity.SpinnerActivity;
 import com.custom.ui.activity.ToggleBtnActivity;
 import com.custom.ui.activity.YouKuActivity;
@@ -110,7 +111,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			
 			break;
 		case R.id.six:
-			
+			ActivityUtil.goToActivity(MainActivity.this, RingActivity.class);	
 			break;
 		case R.id.seven:
 			
