@@ -120,12 +120,20 @@ public class MyScrollView extends ViewGroup {
 	 */
 	private int firstX = 0;
 	
-	
+	/*
+	 *  事件传递机制
+	 *  ① view 执行 dispatchTouchEvent方法，开始分发事件
+	 *  ② 执行 onInterceptTouchEvent 判断是否中断事件
+	 *  ③ 执行 onTouchEvent，去处理事件
+	 */
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		
-		
+		/*
+		 *  解决拖动的时候，图片跳动的Bug
+		 *   原因：onTouchEvent收到的第一个事件是MOve,不是Down
+		 */
 		
 		
 		// 把 touch事件 分发给它
@@ -279,6 +287,13 @@ public class MyScrollView extends ViewGroup {
 			
 		switch(ev.getAction()){
 		case MotionEvent.ACTION_DOWN:
+			
+			/*
+			 *  解决拖动的时候，图片跳动的Bug
+			 *   原因：onTouchEvent收到的第一个事件是MOve,不是Down
+			 */
+			detector.onTouchEvent(ev);
+			
 			// 得到的是相对于自身左上角的值
 			firstX=(int)ev.getX();
 			firstY = (int)ev.getY();
