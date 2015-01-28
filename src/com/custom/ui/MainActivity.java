@@ -11,12 +11,14 @@ import android.widget.ToggleButton;
 import com.custom.ui.activity.AttrActivity;
 import com.custom.ui.activity.BannerActivity;
 import com.custom.ui.activity.CustomVGroupActivity;
+import com.custom.ui.activity.EmpireActivity;
 import com.custom.ui.activity.JDActivity;
 import com.custom.ui.activity.RingActivity;
 import com.custom.ui.activity.SpinnerActivity;
 import com.custom.ui.activity.ToggleBtnActivity;
 import com.custom.ui.activity.YouKuActivity;
 import com.custom.ui.utils.ActivityUtil;
+import com.custom.ui.view.HKText;
 import com.lidroid.xutils.ViewUtils;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -114,7 +116,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			ActivityUtil.goToActivity(MainActivity.this, RingActivity.class);	
 			break;
 		case R.id.seven:
-			
+			ActivityUtil.goToActivity(MainActivity.this, EmpireActivity.class);	
 			break;
 		case R.id.eight:
 			

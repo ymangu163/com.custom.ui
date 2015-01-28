@@ -34,6 +34,7 @@
         <activity android:name=".activity.SlinceInstallActivity"  android:launchMode="singleInstance"></activity>
         <activity android:name=".activity.CustomVGroupActivity"  android:launchMode="singleInstance"></activity>
         <activity android:name=".activity.RingActivity"  android:launchMode="singleInstance"></activity>
+        <activity android:name=".activity.EmpireActivity"  android:launchMode="singleInstance"></activity>
     
     
     </application>
